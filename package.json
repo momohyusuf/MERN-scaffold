@@ -1,0 +1,21 @@
+{
+  "type": "module",
+  "name": "scalfold-fullstackapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "scaffold": "index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "global-modules": "^2.0.0",
+    "inquirer": "^9.2.12",
+    "rxjs": "^7.8.1"
+  }
+}

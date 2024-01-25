@@ -1,0 +1,14 @@
+Some files i am considering adding on the frontend
+axios
+
+components frameworks
+antd, material Ui,
+
+
+these are what were going to be adding to the dependencies when a user choose MUI
+// "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/material": "latest",
+
+// this will be installed when a user selects ant design
+     "antd": "^5.12.1",
