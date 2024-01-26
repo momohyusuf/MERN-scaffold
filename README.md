@@ -9,7 +9,7 @@ You can also generate them as a full stack project.
 By using [npm](http://npmjs.org) (the recommended way):
 
 ```bash
-npm install -g mern-scaffold # or using yarn: yarn global add nodemon
+npm install -g mern-scaffold # or using yarn: yarn global add mern-scaffold
 ```
 
 mern-scaffold will be installed globally to your system path.
