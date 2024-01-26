@@ -19,7 +19,7 @@ mern-scaffold will be installed globally to your system path.
 After downloading, on you Command line just type
 
 ```bash
-scaffold
+mern-scaffold
 ```
 
 # Frontend app
