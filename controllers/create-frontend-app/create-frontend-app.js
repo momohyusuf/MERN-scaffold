@@ -13,7 +13,7 @@ import path from 'node:path';
 import globalModules from 'global-modules';
 
 // my package name
-const packageName = 'scalfold-fullstackapp'; // Replace with the name of your global package
+const packageName = 'mern-scaffold'; // Replace with the name of your global package
 // my package directory
 const packageDirectory = path.join(globalModules, packageName);
 

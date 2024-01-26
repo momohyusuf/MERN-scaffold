@@ -12,3 +12,21 @@ these are what were going to be adding to the dependencies when a user choose MU
 
 // this will be installed when a user selects ant design
      "antd": "^5.12.1",
+
+to be added    
+See the [FAQ](https://github.com/remy/nodemon/blob/master/faq.md) and please add your own questions if you think they would help others.
+
+## Backers
+
+Thank you to all [our backers](https://opencollective.com/nodemon#backer)! 🙏
+
+[![nodemon backers](https://opencollective.com/nodemon/backers.svg?width=890)](https://opencollective.com/nodemon#backers)
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [Sponsor this project today ❤️](https://opencollective.com/nodemon#sponsor)
+
+
+
+[![NPM version](https://badge.fury.io/js/nodemon.svg)](https://npmjs.org/package/nodemon)
+[![Backers on Open Collective](https://opencollective.com/nodemon/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/nodemon/sponsors/badge.svg)](#sponsors)

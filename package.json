@@ -1,7 +1,7 @@
 {
   "type": "module",
-  "name": "scalfold-fullstackapp",
-  "version": "1.0.0",
+  "name": "mern-scaffold",
+  "version": "1.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,12 +10,22 @@
   "bin": {
     "scaffold": "index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "MERN",
+    "react",
+    "vite",
+    "express",
+    "boilerplate"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "global-modules": "^2.0.0",
     "inquirer": "^9.2.12",
     "rxjs": "^7.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/momohyusuf/MERN-scaffold.git"
   }
 }
