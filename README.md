@@ -119,3 +119,7 @@ cd folder_name
 npm install
 npm run dev
 ```
+
+# support
+
+If you would like to support me, you can [buy me a coffee ☕](https://www.buymeacoffee.com/momoh/)
