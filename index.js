@@ -29,50 +29,51 @@ inquirer.prompt(prompts).ui.process.subscribe(
     const { name, answer } = answers;
     previousPrompts.push(answer);
 
-    // // handle folder creation for the application
-    // if (name === 'application name') {
-
-    // }
+    let first_prompt_answer = previousPrompts[0];
+    let second_prompt_answer = previousPrompts[1];
+    let last_prompt_answer = previousPrompts[2];
 
     // determine what type of application the user want to build
     if (name === 'frontend component library') {
       // check if user wants to create a frontend application
-      if (previousPrompts[1] === 'Frontend') {
+      if (second_prompt_answer === 'Frontend') {
         create_application_folder(
-          replace_white_space_with_under_score(previousPrompts[0])
+          replace_white_space_with_under_score(first_prompt_answer)
         );
         create_frontend_application(
-          replace_white_space_with_under_score(previousPrompts[0]),
-          previousPrompts[2]
+          replace_white_space_with_under_score(first_prompt_answer),
+          last_prompt_answer
         );
       }
 
       // check if user wants to create a backend application
-      if (previousPrompts[1] === 'Backend') {
+      if (second_prompt_answer === 'Backend') {
         create_application_folder(
-          replace_white_space_with_under_score(previousPrompts[0])
+          replace_white_space_with_under_score(first_prompt_answer)
         );
         create_backend_application(
-          replace_white_space_with_under_score(previousPrompts[0])
+          replace_white_space_with_under_score(first_prompt_answer)
         );
       }
       // check if user wants to create a fullstack application
-      if (previousPrompts[1] === 'Fullstack') {
+      if (second_prompt_answer === 'Fullstack') {
         create_application_folder(
-          `${replace_white_space_with_under_score(previousPrompts[0])}_frontend`
+          `${replace_white_space_with_under_score(
+            first_prompt_answer
+          )}_frontend`
         );
 
         create_frontend_application(
           `${replace_white_space_with_under_score(
-            previousPrompts[0]
+            first_prompt_answer
           )}_frontend`,
-          previousPrompts[2]
+          last_prompt_answer
         );
         create_application_folder(
-          `${replace_white_space_with_under_score(previousPrompts[0])}_backend`
+          `${replace_white_space_with_under_score(first_prompt_answer)}_backend`
         );
         create_backend_application(
-          `${replace_white_space_with_under_score(previousPrompts[0])}_backend`
+          `${replace_white_space_with_under_score(first_prompt_answer)}_backend`
         );
       }
     }
@@ -108,7 +109,9 @@ prompts.next({
   type: 'list',
   name: 'frontend component library',
   choices: ['Ant design', 'Material UI', 'None'],
-  when: (value) => value['application type'] === 'Frontend' || 'Fullstack',
+  when: (value) =>
+    value['application type'] === 'Frontend' ||
+    value['application type'] === 'Fullstack',
 });
 
 // Complete the prompts
