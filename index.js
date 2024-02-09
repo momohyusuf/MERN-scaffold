@@ -30,52 +30,54 @@ inquirer.prompt(prompts).ui.process.subscribe(
     previousPrompts.push(answer);
 
     let first_prompt_answer = previousPrompts[0];
-    let second_prompt_answer = previousPrompts[1];
+
     let last_prompt_answer = previousPrompts[2];
-
+    console.log(previousPrompts);
     // determine what type of application the user want to build
-    if (name === 'frontend component library') {
-      // check if user wants to create a frontend application
-      if (second_prompt_answer === 'Frontend') {
-        create_application_folder(
-          replace_white_space_with_under_score(first_prompt_answer)
-        );
-        create_frontend_application(
-          replace_white_space_with_under_score(first_prompt_answer),
-          last_prompt_answer
-        );
-      }
 
-      // check if user wants to create a backend application
-      if (second_prompt_answer === 'Backend') {
-        create_application_folder(
-          replace_white_space_with_under_score(first_prompt_answer)
-        );
-        create_backend_application(
-          replace_white_space_with_under_score(first_prompt_answer)
-        );
-      }
-      // check if user wants to create a fullstack application
-      if (second_prompt_answer === 'Fullstack') {
-        create_application_folder(
-          `${replace_white_space_with_under_score(
-            first_prompt_answer
-          )}_frontend`
-        );
+    // check if user wants to create a frontend application
+    if (
+      name === 'frontend component library' &&
+      previousPrompts[1] === 'Frontend'
+    ) {
+      create_application_folder(
+        replace_white_space_with_under_score(first_prompt_answer)
+      );
+      create_frontend_application(
+        replace_white_space_with_under_score(first_prompt_answer),
+        last_prompt_answer
+      );
+    }
 
-        create_frontend_application(
-          `${replace_white_space_with_under_score(
-            first_prompt_answer
-          )}_frontend`,
-          last_prompt_answer
-        );
-        create_application_folder(
-          `${replace_white_space_with_under_score(first_prompt_answer)}_backend`
-        );
-        create_backend_application(
-          `${replace_white_space_with_under_score(first_prompt_answer)}_backend`
-        );
-      }
+    // check if user wants to create a backend application
+    if (previousPrompts[1] === 'Backend') {
+      console.log('backend selected');
+      create_application_folder(
+        replace_white_space_with_under_score(first_prompt_answer)
+      );
+      create_backend_application(
+        replace_white_space_with_under_score(first_prompt_answer)
+      );
+    }
+    // check if user wants to create a fullstack application
+    if (
+      previousPrompts[1] === 'Fullstack' &&
+      name === 'frontend component library'
+    ) {
+      create_application_folder(
+        `${replace_white_space_with_under_score(first_prompt_answer)}_frontend`
+      );
+
+      create_frontend_application(
+        `${replace_white_space_with_under_score(first_prompt_answer)}_frontend`,
+        last_prompt_answer
+      );
+      create_application_folder(
+        `${replace_white_space_with_under_score(first_prompt_answer)}_backend`
+      );
+      create_backend_application(
+        `${replace_white_space_with_under_score(first_prompt_answer)}_backend`
+      );
     }
   },
   (error) => {

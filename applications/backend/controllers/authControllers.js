@@ -1,66 +1,71 @@
-const CustomError = require('../utils/customError');
-const UserModel = require('../model/userModel');
-const HTTPSTATUSCODE = require('../utils/httpStatusCodes');
-const { generateJwtToken } = require('../utils/tokens');
-const validator = require('validator').default;
-const bcrypt = require('bcrypt');
+const CustomError = require('../utils/customError'); // Import the custom error class
+const UserModel = require('../model/userModel'); // Import the user model
+const HTTPSTATUSCODE = require('../utils/httpStatusCodes'); // Import the HTTP status codes
+const { generateJwtToken } = require('../utils/tokens'); // Import the function to generate JWT tokens
+const validator = require('validator').default; // Import the validator library
+const bcrypt = require('bcrypt'); // Import the bcrypt library for password hashing
 
-//  Registering a user
-//  Public route
 const signUpUser = async (req, res) => {
+  // Extract the name, email, and password from the request body
   const { name, email, password } = req.body;
 
+  // Validate the input
   if (
-    !name.trim() ||
-    !validator.isEmail(email) ||
-    !validator.isStrongPassword(password)
+    !name.trim() || // Check if the name is empty or contains only whitespace
+    !validator.isEmail(email) || // Check if the email is valid
+    !validator.isStrongPassword(password) // Check if the password is strong
   ) {
+    // If any of the checks fail, throw a custom error
     throw new CustomError(
       HTTPSTATUSCODE.BAD_REQUEST,
       'Please provide the required values'
     );
   }
 
-  // Check if user email already has a registered account
+  // Check if a user with the provided email already exists
   const checkUser = await UserModel.findOne({ email });
   if (checkUser) {
+    // If a user with the same email exists, throw a custom error
     throw new CustomError(400, `An account with ${email} already exist`);
   }
 
-  // Create a new user with email and password
+  // Create a new user with the provided data
   const newUser = await UserModel.create({
     name,
     email,
     password,
   });
 
-  // //  generate jwt token
+  // Generate a JWT access token for the user
   const accessToken = await generateJwtToken({
-    userId: newUser._id,
-    name: newUser.name,
-    email: newUser.email,
+    userId: newUser._id, // Use the user's ID as the subject of the token
+    name: newUser.name, // Include the user's name in the token payload
+    email: newUser.email, // Include the user's email in the token payload
   });
 
+  // Send the response with the user's information and the access token
   res
-    .status(HTTPSTATUSCODE.CREATED)
-    .json({ name: newUser.name, email: newUser.email, accessToken });
+    .status(HTTPSTATUSCODE.CREATED) // Set the status code to 201 (Created)
+    .json({ name: newUser.name, email: newUser.email, accessToken }); // Send the user's name, email, and the access token in the response body
 };
 
-//  Sign in a user
-//  Public route
 const signIn = async (req, res) => {
+  // Extract the email and password from the request body
   const { email, password } = req.body;
 
+  // Validate the input
   if (!validator.isEmail(email) || !validator.isStrongPassword(password)) {
+    // If any of the checks fail, throw a custom error
     throw new CustomError(
       HTTPSTATUSCODE.BAD_REQUEST,
       'Please provide the required values'
     );
   }
 
-  // check if user account exists
+  // Find the user with the provided email
   const user = await UserModel.findOne({ email });
 
+  // If the user does not exist, throw a custom error
   if (!user) {
     throw new CustomError(
       HTTPSTATUSCODE.BAD_REQUEST,
@@ -68,8 +73,10 @@ const signIn = async (req, res) => {
     );
   }
 
-  // check password if password is correct
+  // Compare the provided password with the user's hashed password
   const passwordCorrect = await bcrypt.compare(password, user.password);
+
+  // If the password is incorrect, throw a custom error
   if (!passwordCorrect) {
     throw new CustomError(
       HTTPSTATUSCODE.BAD_REQUEST,
@@ -77,17 +84,21 @@ const signIn = async (req, res) => {
     );
   }
 
-  // create an access token
+  // Generate a JWT access token for the user
   const accessToken = await generateJwtToken({
-    userId: newUser._id,
-    name: newUser.name,
-    email: newUser.email,
+    userId: newUser._id, // Use the user's ID as the subject of the token
+    name: newUser.name, // Include the user's name in the token payload
+    email: newUser.email, // Include the user's email in the token payload
   });
+
+  // Create a user info object to send in the response
   const userInfo = {
     name: user.name,
     userId: user._id,
   };
-  res.status(200).json({ ...userInfo, accessToken });
+
+  // Send the response with the user's information and the access token
+  res.status(200).json({ ...userInfo, accessToken }); // Send the user's name, user ID, and the access token in the response body
 };
 
 module.exports = {

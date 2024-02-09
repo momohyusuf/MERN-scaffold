@@ -35,9 +35,6 @@ Speed up your Vite dev server with [SWC](https://swc.rs/)
 The following folders and files will be generated
 
 ```ts
-- 📂 components
-- 📂 context
-- 📂 hooks
 - 📂 layouts
 - 📂 pages
 - 📂 public
