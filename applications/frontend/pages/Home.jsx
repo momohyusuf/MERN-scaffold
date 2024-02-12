@@ -13,15 +13,13 @@ const Home = () => {
   // Render the Home component
   return (
     <section style={style}>
-      {/* Create a div container for the content */}
       <div className="p-4 text-center shadow-md rounded-md">
-        {/* Display a header asking for support */}
         <h3>If you would like to support me, You can </h3>
-        {/* Provide a link to buy me a coffee */}
         <a
           href="https://www.buymeacoffee.com/momoh"
           target="_blank"
           rel="noopener noreferrer"
+          className="text-red-500 text-2xl font-semibold capitalize"
         >
           buy me a coffee ☕{' '}
         </a>

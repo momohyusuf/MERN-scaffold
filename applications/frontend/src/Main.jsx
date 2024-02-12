@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 // Import the router configuration as 'router'
-import router from './App.jsx';
+import router from './app.jsx';
 
 // Import the RouterProvider from react-router-dom
 import { RouterProvider } from 'react-router-dom';

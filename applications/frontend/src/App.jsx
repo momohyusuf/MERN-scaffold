@@ -1,4 +1,3 @@
-javascript;
 // Import the necessary modules.
 import { createBrowserRouter } from 'react-router-dom';
 import Home from '../pages/Home';
