@@ -1,4 +1,3 @@
-javascript;
 // Require the Express module
 const express = require('express');
 
@@ -9,16 +8,18 @@ const { signUpUser, signIn } = require('../controllers/authControllers');
 const router = express.Router();
 
 // Define a route for user sign up
-router.post('/sign-up', (req, res) => {
+router.post(
+  '/sign-up',
   // Call the signUpUser controller function to handle the sign-up request
-  signUpUser(req, res);
-});
+  signUpUser
+);
 
 // Define a route for user sign in
-router.post('/sign-in', (req, res) => {
+router.post(
+  '/sign-in',
   // Call the signIn controller function to handle the sign-in request
-  signIn(req, res);
-});
+  signIn
+);
 
 // Export the router for use in other parts of the application
 module.exports = router;
