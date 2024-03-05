@@ -5,15 +5,15 @@
  * */
 
 // built in core node module for working with the file system
-import fs from 'node:fs';
+import fs from "node:fs";
 // built in core node module for working with the file path
-import path from 'node:path';
+import path from "node:path";
 
 // an external package to help me the directory where my npm package will be downloaded into
-import globalModules from 'global-modules';
+import globalModules from "global-modules";
 
 // my package name
-const packageName = 'mern-scaffold'; // Replace with the name of your global package
+const packageName = "mern-scaffold"; // Replace with the name of your global package
 // my package directory
 const packageDirectory = path.join(globalModules, packageName);
 
@@ -55,7 +55,7 @@ function create_frontend_application(folder_name, component_library_chosen) {
               path.resolve(
                 `${appDirectoryToReadFrom}/${item}/${subFolderFile}`
               ),
-              'utf-8'
+              "utf-8"
             );
 
             // write the content as well to the new destination
@@ -68,33 +68,33 @@ function create_frontend_application(folder_name, component_library_chosen) {
 
         return;
       }
-      // ************************
+      // **** ********************
 
       // read the content of each of the file
-      let data = fs.readFileSync(`${appDirectoryToReadFrom}/${item}`, 'utf-8');
+      let data = fs.readFileSync(`${appDirectoryToReadFrom}/${item}`, "utf-8");
 
       //   lets modify the package.json before creating it
-      if (item === 'package.json') {
+      if (item === "package.json") {
         const updated_package = JSON.parse(data);
         updated_package.name = folder_name;
 
         // check which of the component library the user has chosen
 
         // for ant design
-        if (component_library_chosen === 'Ant design') {
+        if (component_library_chosen === "Ant design") {
           updated_package.dependencies = {
             ...updated_package.dependencies,
-            antd: 'latest',
+            antd: "latest",
           };
         }
 
         // for Material UI
-        if (component_library_chosen === 'Material UI') {
+        if (component_library_chosen === "Material UI") {
           updated_package.dependencies = {
             ...updated_package.dependencies,
-            '@emotion/react': 'latest',
-            '@emotion/styled': 'latest',
-            '@mui/material': 'latest',
+            "@emotion/react": "latest",
+            "@emotion/styled": "latest",
+            "@mui/material": "latest",
           };
         }
 

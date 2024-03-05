@@ -1,23 +1,20 @@
 // Import the React library
-import React from 'react';
+import React from "react";
 
 // Import the ReactDOM library for working with DOM elements
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom/client";
 
 // Import the CSS file for styling the application
-import './index.css';
+import "./index.css";
 
 // Import the router configuration as 'router'
-import router from './app.jsx';
-
-// Import the RouterProvider from react-router-dom
-import { RouterProvider } from 'react-router-dom';
+import App from "./App.jsx";
 
 // Create a root React element using ReactDOM's createRoot method and attach it to the DOM
-ReactDOM.createRoot(document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById("root"))
 
   // Render the RouterProvider with the 'router' configuration
-  .render(<RouterProvider router={router} />);
+  .render(<App />);
 
 // **Comments:**
 

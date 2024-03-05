@@ -1,19 +1,19 @@
 // Import the necessary modules.
-import { createBrowserRouter } from 'react-router-dom';
-import Home from '../pages/Home';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "../pages/Home";
 
-// Create a new router instance.
-const router = createBrowserRouter([
-  // Define the root route.
-  {
-    path: '/',
-    // Specify the component to be rendered for this route.
-    element: <Home />,
-  },
-]);
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 // Export the router instance.
-export default router;
+export default App;
 
 // **Comments:**
 
