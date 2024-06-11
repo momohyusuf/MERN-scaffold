@@ -1,24 +1,17 @@
-// Import the necessary modules.
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+
+// Import the Home and About components from their respective pages
 import Home from "../pages/Home";
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+// Create a router using the createBrowserRouter function
+const router = createBrowserRouter([
+  {
+    // Define a route for the home page
+    path: "/",
+    // Specify the Home component as the element to be rendered for this route
+    element: <Home />,
+  },
+]);
 
-// Export the router instance.
-export default App;
-
-// **Comments:**
-
-// * The `createBrowserRouter` function is used to create a new router instance.
-// * The `path` property of a route object specifies the URL path that will trigger the route.
-// * The `element` property of a route object specifies the component that will be rendered for that route.
-// * The `Home` component is imported from the `../pages/Home` file.
-// * The router instance is exported as the default export of the file.
+// Export the router
+export default router;
