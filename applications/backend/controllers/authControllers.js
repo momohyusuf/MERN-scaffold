@@ -1,30 +1,42 @@
-const CustomError = require('../utils/customError'); // Import the custom error class
-const UserModel = require('../model/userModel'); // Import the user model
-const HTTPSTATUSCODE = require('../utils/httpStatusCodes'); // Import the HTTP status codes
-const { generateJwtToken } = require('../utils/tokens'); // Import the function to generate JWT tokens
-const validator = require('validator').default; // Import the validator library
-const bcrypt = require('bcrypt'); // Import the bcrypt library for password hashing
+const CustomError = require("../utils/customError"); // Import the custom error class
+const UserModel = require("../model/userModel"); // Import the user model
+const HTTPSTATUSCODE = require("../utils/httpStatusCodes"); // Import the HTTP status codes
+const { generateJwtToken } = require("../utils/tokens"); // Import the function to generate JWT tokens
+const validator = require("validator").default; // Import the validator library
+const bcrypt = require("bcrypt"); // Import the bcrypt library for password hashing
 
 const signUpUser = async (req, res) => {
   // Extract the name, email, and password from the request body
   const { name, email, password } = req.body;
 
+  if (!name.trim()) {
+    throw new CustomError(
+      HTTPSTATUSCODE.BAD_REQUEST,
+      "Please provide your name"
+    );
+  }
+
   // Validate the input
   if (
-    !name.trim() || // Check if the name is empty or contains only whitespace
-    !validator.isEmail(email) || // Check if the email is valid
-    !validator.isStrongPassword(password) // Check if the password is strong
+    !validator.isEmail(email) // Check if the email is valid
   ) {
     // If any of the checks fail, throw a custom error
     throw new CustomError(
       HTTPSTATUSCODE.BAD_REQUEST,
-      'Please provide the required values'
+      "Please provide a valid email address"
+    );
+  }
+
+  if (!validator.isStrongPassword(password)) {
+    throw new CustomError(
+      HTTPSTATUSCODE.BAD_REQUEST,
+      "Password must be at least 8 characters long and contain a number, an uppercase letter, and a special character"
     );
   }
 
   // Check if a user with the provided email already exists
-  const checkUser = await UserModel.findOne({ email });
-  if (checkUser) {
+  const user = await UserModel.findOne({ email });
+  if (user) {
     // If a user with the same email exists, throw a custom error
     throw new CustomError(400, `An account with ${email} already exist`);
   }
@@ -58,7 +70,7 @@ const signIn = async (req, res) => {
     // If any of the checks fail, throw a custom error
     throw new CustomError(
       HTTPSTATUSCODE.BAD_REQUEST,
-      'Please provide the required values'
+      "Please provide a valid email address and password"
     );
   }
 
@@ -69,7 +81,8 @@ const signIn = async (req, res) => {
   if (!user) {
     throw new CustomError(
       HTTPSTATUSCODE.BAD_REQUEST,
-      'Please provide the required values'
+
+      `No account with ${email}`
     );
   }
 
@@ -80,15 +93,15 @@ const signIn = async (req, res) => {
   if (!passwordCorrect) {
     throw new CustomError(
       HTTPSTATUSCODE.BAD_REQUEST,
-      'Password or email is incorrect'
+      "Password or email is incorrect"
     );
   }
 
   // Generate a JWT access token for the user
   const accessToken = await generateJwtToken({
-    userId: newUser._id, // Use the user's ID as the subject of the token
-    name: newUser.name, // Include the user's name in the token payload
-    email: newUser.email, // Include the user's email in the token payload
+    userId: user._id, // Use the user's ID as the subject of the token
+    name: user.name, // Include the user's name in the token payload
+    email: user.email, // Include the user's email in the token payload
   });
 
   // Create a user info object to send in the response
