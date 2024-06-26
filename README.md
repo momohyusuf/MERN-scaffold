@@ -8,9 +8,19 @@ You can also generate them as a full stack project.
 
 By using [npm](http://npmjs.org) (the recommended way):
 
+npm install -g mern-scaffold
+
+````
+
+mern-scaffold will be installed globally to your system path.
+
+# Usage
+
+After downloading, on you Command line just type
+
 ```bash
-npx mern-scaffold
-```
+mern-scaffold
+````
 
 # Frontend app
 
